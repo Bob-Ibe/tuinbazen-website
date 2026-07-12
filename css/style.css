@@ -474,7 +474,9 @@ p {
     padding: 0;
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.4s ease, padding 0.4s ease;
+    /* BEWUST géén transition op max-height/padding: tijdens zo'n animatie
+       schuiven de links onder je vinger door en tik je op de verkeerde
+       pagina. Het menu klapt daarom direct open. */
     box-shadow: var(--shadow-md);
   }
 
@@ -484,10 +486,25 @@ p {
     padding: 1rem 0 1.5rem;
   }
 
+  /* Scheidingslijnen + ruimere tik-gebieden voor foutloos tikken.
+     width op álle li's: anders is de eerste rij (Home) maar zo breed
+     als de tekst en mist een tik ernaast. */
+  .nav-menu > li {
+    width: 100%;
+  }
+
+  .nav-menu > li + li {
+    border-top: 1px solid #f0ede8;
+  }
+
   .nav-link {
+    /* display:block is essentieel: als inline-element telt de verticale
+       padding niet mee in de layout, waardoor de links elkaar overlappen
+       en een tik op bijv. "Home" op "Diensten" landt. */
+    display: block;
     color: var(--color-navy) !important;
     width: 100%;
-    padding: 0.9rem 1.5rem;
+    padding: 1.1rem 1.5rem;
     font-size: 1rem;
   }
 
@@ -617,11 +634,12 @@ p {
     opacity: 1;
     padding: 0;
     pointer-events: none;
-    transition: max-height 0.3s ease, padding 0.3s ease;
+    /* BEWUST géén transition: het uitklappen duwt de links eronder omlaag —
+       tijdens een animatie zou je op de verkeerde link tikken. */
   }
 
   .has-dropdown.open .nav-dropdown {
-    max-height: 500px;
+    max-height: none;
     padding: 0.3rem 0;
     pointer-events: all;
   }
@@ -629,8 +647,8 @@ p {
   .nav-dropdown::before { display: none; }
 
   .nav-dropdown li a {
-    padding: 0.6rem 2.5rem;
-    font-size: 0.88rem;
+    padding: 0.8rem 2.5rem;
+    font-size: 0.9rem;
     color: var(--color-navy);
   }
 
