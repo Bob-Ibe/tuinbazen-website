@@ -508,9 +508,10 @@ p {
     font-size: 1rem;
   }
 
+  /* Geen actieve-pagina-streep in het mobiele menu: door de
+     volle-breedte-links oogt die als een groene (laad)balk. */
   .nav-link::after {
-    bottom: auto;
-    left: 1.5rem;
+    display: none;
   }
 
   /* CTA-knop hoort niet in het mobiele hamburger-menu (staat al in
