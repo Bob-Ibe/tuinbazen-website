@@ -269,5 +269,27 @@ const countObserver = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.stats-grid').forEach(el => countObserver.observe(el));
 
+/* --- Hero-video autoplay forceren (robuust tegen autoplay-policy) --- */
+const heroVideo = document.querySelector('.hero-video');
+if (heroVideo) {
+  heroVideo.muted = true;            // property zetten, niet alleen attribuut
+  heroVideo.setAttribute('muted', ''); // extra zekerheid voor iOS Safari
+  const tryPlay = () => {
+    const p = heroVideo.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  };
+  tryPlay();
+  // Nogmaals proberen zodra de video geladen is
+  heroVideo.addEventListener('loadeddata', tryPlay);
+  heroVideo.addEventListener('canplay', tryPlay);
+  // Fallback: start bij de eerste interactie als de browser autoplay blokkeert
+  const kick = () => { tryPlay(); document.removeEventListener('touchstart', kick); document.removeEventListener('click', kick); document.removeEventListener('scroll', kick); };
+  document.addEventListener('touchstart', kick, { once: true, passive: true });
+  document.addEventListener('click', kick, { once: true });
+  document.addEventListener('scroll', kick, { once: true, passive: true });
+  // Hervat autoplay wanneer de tab weer zichtbaar wordt
+  document.addEventListener('visibilitychange', () => { if (!document.hidden) tryPlay(); });
+}
+
 /* Init */
 updateNav();

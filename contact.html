@@ -140,6 +140,35 @@
       margin-bottom: 0.4rem;
     }
 
+    /* Persoon */
+    .contact-persoon {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-persoon img {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center 20%;
+      flex-shrink: 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .contact-persoon-tekst strong {
+      display: block;
+      font-size: 1.05rem;
+      color: var(--color-navy);
+    }
+
+    .contact-persoon-tekst span {
+      font-size: 0.9rem;
+      color: var(--color-text-light, #666);
+    }
+
     /* Formulier */
     .contact-form-col {
       background: var(--color-white);
@@ -316,6 +345,14 @@
         <div class="contact-info-col reveal">
           <h2>Direct bereikbaar</h2>
           <p>Liever bellen of mailen? Geen probleem. Wij zijn door de week bereikbaar en reageren altijd snel.</p>
+
+          <div class="contact-persoon">
+            <img src="img/portfolio/dennis-graafmachine.webp" alt="Dennis, eigenaar van Tuinbazen">
+            <div class="contact-persoon-tekst">
+              <strong>Dennis</strong>
+              <span>Eigenaar &middot; staat je persoonlijk te woord</span>
+            </div>
+          </div>
 
           <div class="contact-details">
             <div class="contact-detail">
