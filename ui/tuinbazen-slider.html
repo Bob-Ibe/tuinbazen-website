@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tuinbazen – Voor & Na</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green-dark:  #2D3E2A;
+      --green-mid:   #556B2F;
+      --sand:        #F5F1E8;
+      --sand-dark:   #EAE4D4;
+      --text:        #1A1A1A;
+      --muted:       #8B8680;
+      --white:       #FFFFFF;
+      --radius:      12px;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--sand);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── Section wrapper ───────────────────────────────── */
+    .section {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 4rem 1.25rem 5rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-mid);
+      margin-bottom: 0.6rem;
+    }
+
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.75rem, 4.5vw, 2.6rem);
+      color: var(--green-dark);
+      line-height: 1.18;
+      margin-bottom: 0.7rem;
+    }
+
+    .intro {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.65;
+      max-width: 58ch;
+      margin-bottom: 2.25rem;
+    }
+
+    /* ── Hint bar ──────────────────────────────────────── */
+    .hint {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      opacity: 1;
+      transition: opacity 0.6s;
+    }
+    .hint.hidden { opacity: 0; pointer-events: none; }
+    .hint svg { flex-shrink: 0; }
+
+    /* ── Slider container ──────────────────────────────── */
+    .compare-wrap {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 6px 32px rgba(45, 62, 42, 0.2);
+      cursor: ew-resize;
+      user-select: none;
+      touch-action: none;
+      background: var(--sand-dark);
+    }
+
+    .compare-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      display: block;
+    }
+
+    .compare-after {
+      clip-path: inset(0 50% 0 0);
+    }
+
+    /* ── Divider line ──────────────────────────────────── */
+    .compare-divider {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 3px;
+      height: 100%;
+      background: var(--white);
+      transform: translateX(-50%);
+      pointer-events: none;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+    }
+
+    /* ── Drag handle ───────────────────────────────────── */
+    .compare-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 48px;
+      height: 48px;
+      background: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+      pointer-events: none;
+    }
+    .compare-handle svg {
+      width: 20px;
+      height: 20px;
+    }
+
+    /* ── Voor / Na labels ──────────────────────────────── */
+    .compare-label {
+      position: absolute;
+      top: 1rem;
+      padding: 0.3rem 0.85rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      border-radius: 100px;
+      pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .label-voor {
+      left: 1rem;
+      background: rgba(0, 0, 0, 0.45);
+      color: var(--white);
+    }
+    .label-na {
+      right: 1rem;
+      background: var(--green-dark);
+      color: var(--white);
+    }
+
+    /* ── Loading skeleton ──────────────────────────────── */
+    .skeleton {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        var(--sand-dark) 25%,
+        #d8d1be 50%,
+        var(--sand-dark) 75%
+      );
+      background-size: 200% 100%;
+      animation: shimmer 1.4s infinite;
+      border-radius: var(--radius);
+      pointer-events: none;
+      transition: opacity 0.4s;
+    }
+    .skeleton.gone { opacity: 0; }
+    @keyframes shimmer {
+      from { background-position: 200% 0; }
+      to   { background-position: -200% 0; }
+    }
+
+    /* ── Project thumbnails ────────────────────────────── */
+    .projects-label {
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .project-btn {
+      all: unset;
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 2px solid transparent;
+      transition: border-color 0.2s, transform 0.15s;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(45, 62, 42, 0.1);
+    }
+    .project-btn:hover { transform: translateY(-2px); }
+    .project-btn.active { border-color: var(--green-dark); }
+
+    .project-btn img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .project-btn-label {
+      display: block;
+      padding: 0.45rem 0.6rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.3;
+    }
+    .project-btn.active .project-btn-label {
+      color: var(--green-dark);
+      font-weight: 600;
+    }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .projects { grid-template-columns: repeat(2, 1fr); }
+      .compare-label { font-size: 0.62rem; padding: 0.25rem 0.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="section">
+
+  <span class="eyebrow">Onze resultaten</span>
+  <h2>Zie wat er mogelijk is in jouw tuin</h2>
+  <p class="intro">
+    Sleep de schuifbalk om het verschil te zien. Van verwilderd en verwaarloosd
+    naar een tuin waar je trots op bent — dat is wat Tuinbazen voor je doet.
+  </p>
+
+  <p class="hint" id="hint" aria-hidden="true">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8B8680" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
+    </svg>
+    Sleep de balk om voor en na te vergelijken
+  </p>
+
+  <div class="compare-wrap" id="compareWrap" role="img" aria-label="Voor en na vergelijking van tuinproject">
+    <div class="skeleton" id="skeleton"></div>
+    <img class="compare-img compare-before" id="imgBefore" alt="Tuin vóór de behandeling">
+    <img class="compare-img compare-after"  id="imgAfter"  alt="Tuin na de behandeling">
+    <div class="compare-divider" id="divider">
+      <div class="compare-handle">
+        <!-- left-right arrows -->
+        <svg viewBox="0 0 24 24" fill="none" stroke="#2D3E2A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/>
+        </svg>
+      </div>
+    </div>
+    <span class="compare-label label-voor">Voor</span>
+    <span class="compare-label label-na">Na</span>
+  </div>
+
+  <p class="projects-label">Kies een project</p>
+  <div class="projects" id="projectList"></div>
+
+</section>
+
+<script>
+  // ─── Project data ────────────────────────────────────────────────────────
+  // Vervang de src-waarden door echte Tuinbazen foto's
+  const projects = [
+    {
+      name: 'Achtertuin Maastricht',
+      before: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=920&q=80',
+      after:  'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=920&q=80',
+      thumb:  'https://images.unsplash.com/photo-1585320806297-9794b3e4aaae?w=300&q=70',
+    },
+    {
+      name: 'Voortuin Valkenburg',
+      before: 'https://images.unsplash.com/photo-1600566752355-35792bedcfea?w=920&q=80',
+      after:  'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=920&q=80',
+      thumb:  'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=300&q=70',
+    },
+    {
+      name: 'Terras Sittard',
+      before: 'https://images.unsplash.com/photo-1574362848149-11496d93a7c7?w=920&q=80',
+      after:  'https://images.unsplash.com/photo-1590418606746-018840f9ecca?w=920&q=80',
+      thumb:  'https://images.unsplash.com/photo-1590418606746-018840f9ecca?w=300&q=70',
+    },
+    {
+      name: 'Borders Heerlen',
+      before: 'https://images.unsplash.com/photo-1563591582-6b1d8f5e4e2b?w=920&q=80',
+      after:  'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=920&q=80',
+      thumb:  'https://images.unsplash.com/photo-1501004318641-b39e6451bec6?w=300&q=70',
+    },
+  ];
+
+  // ─── State & refs ────────────────────────────────────────────────────────
+  let pct      = 50;   // 0–100
+  let dragging = false;
+  let hintHidden = false;
+
+  const wrap      = document.getElementById('compareWrap');
+  const imgBefore = document.getElementById('imgBefore');
+  const imgAfter  = document.getElementById('imgAfter');
+  const divider   = document.getElementById('divider');
+  const skeleton  = document.getElementById('skeleton');
+  const hint      = document.getElementById('hint');
+  const list      = document.getElementById('projectList');
+
+  // ─── Slider position ─────────────────────────────────────────────────────
+  function applyPosition(clientX) {
+    const rect = wrap.getBoundingClientRect();
+    pct = Math.min(100, Math.max(0, ((clientX - rect.left) / rect.width) * 100));
+    imgAfter.style.clipPath   = `inset(0 ${(100 - pct).toFixed(2)}% 0 0)`;
+    divider.style.left        = pct.toFixed(2) + '%';
+  }
+
+  function hideHint() {
+    if (!hintHidden) {
+      hintHidden = true;
+      hint.classList.add('hidden');
+    }
+  }
+
+  // ─── Mouse events ────────────────────────────────────────────────────────
+  wrap.addEventListener('mousedown', e => {
+    dragging = true;
+    applyPosition(e.clientX);
+    hideHint();
+  });
+  window.addEventListener('mousemove', e => {
+    if (dragging) applyPosition(e.clientX);
+  });
+  window.addEventListener('mouseup', () => { dragging = false; });
+
+  // ─── Touch events ────────────────────────────────────────────────────────
+  wrap.addEventListener('touchstart', e => {
+    dragging = true;
+    applyPosition(e.touches[0].clientX);
+    hideHint();
+  }, { passive: true });
+  window.addEventListener('touchmove', e => {
+    if (dragging) applyPosition(e.touches[0].clientX);
+  }, { passive: true });
+  window.addEventListener('touchend', () => { dragging = false; });
+
+  // ─── Load project ────────────────────────────────────────────────────────
+  let loadedCount = 0;
+
+  function loadProject(index) {
+    const p = projects[index];
+    loadedCount = 0;
+    skeleton.classList.remove('gone');
+
+    // Reset to center
+    pct = 50;
+    imgAfter.style.clipPath = 'inset(0 50% 0 0)';
+    divider.style.left      = '50%';
+
+    function onLoad() {
+      loadedCount++;
+      if (loadedCount === 2) skeleton.classList.add('gone');
+    }
+
+    imgBefore.onload = onLoad;
+    imgAfter.onload  = onLoad;
+    imgBefore.src    = p.before;
+    imgAfter.src     = p.after;
+
+    // Update active state
+    list.querySelectorAll('.project-btn').forEach((btn, i) => {
+      btn.classList.toggle('active', i === index);
+    });
+  }
+
+  // ─── Build thumbnails ────────────────────────────────────────────────────
+  projects.forEach((p, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'project-btn' + (i === 0 ? ' active' : '');
+    btn.setAttribute('aria-label', p.name);
+    btn.innerHTML = `
+      <img src="${p.thumb}" alt="${p.name}" loading="lazy">
+      <span class="project-btn-label">${p.name}</span>
+    `;
+    btn.addEventListener('click', () => loadProject(i));
+    list.appendChild(btn);
+  });
+
+  // ─── Init ────────────────────────────────────────────────────────────────
+  loadProject(0);
+</script>
+
+</body>
+</html>

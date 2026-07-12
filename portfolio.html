@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Bekijk onze projecten – tuinen, terrassen, bestrating en meer in Zuid-Limburg door Tuinbazen.">
+  <!-- Social sharing (Open Graph / Twitter). Zet bij livegang het volledige domein vóór de relatieve paden voor optimale weergave. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tuinbazen">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="Projecten – Tuinbazen | Zuid-Limburg">
+  <meta property="og:description" content="Bekijk onze projecten – tuinen, terrassen, bestrating en meer in Zuid-Limburg door Tuinbazen.">
+  <meta property="og:image" content="img/portfolio/kasseien-pad.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projecten – Tuinbazen | Zuid-Limburg">
+  <meta name="twitter:description" content="Bekijk onze projecten – tuinen, terrassen, bestrating en meer in Zuid-Limburg door Tuinbazen.">
+  <meta name="twitter:image" content="img/portfolio/kasseien-pad.webp">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#1B6B35">
+  <title>Projecten – Tuinbazen | Zuid-Limburg</title>
+  <link rel="canonical" href="https://www.tuinbazen.nl/portfolio.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== PORTFOLIO PAGINA ===== */
+    .portfolio-hero {
+      background: var(--color-navy);
+      padding: calc(var(--nav-height) + 4rem) 0 4rem;
+      text-align: center;
+    }
+
+    .portfolio-hero h1 { color: var(--color-white); margin-bottom: 1rem; }
+    .portfolio-hero p  { color: rgba(255,255,255,0.65); font-size: 1.05rem; margin: 0 auto; text-align: center; }
+
+    /* ── Voor & Na Slider ─── */
+    .vna-section { padding: 5rem 0; background: var(--color-cream, #f8f5ef); }
+    .vna-hint {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.82rem; color: var(--color-muted, #888);
+      margin-bottom: 1rem; transition: opacity 0.5s;
+    }
+    .vna-hint.hidden { opacity: 0; pointer-events: none; }
+    .vna-wrap {
+      position: relative; width: 100%; aspect-ratio: 16/9;
+      border-radius: 12px; overflow: hidden;
+      box-shadow: 0 6px 32px rgba(45,62,42,0.18);
+      cursor: ew-resize; user-select: none; touch-action: none;
+      background: var(--color-sand-dark, #eae4d4);
+    }
+    .vna-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; display: block; }
+    .vna-after { clip-path: inset(0 0 0 50%); }
+    .vna-divider {
+      position: absolute; top: 0; left: 50%; width: 3px; height: 100%;
+      background: #fff; transform: translateX(-50%); pointer-events: none;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.1);
+    }
+    .vna-handle {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+      width: 48px; height: 48px; background: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+    }
+    .vna-handle svg { width: 20px; height: 20px; }
+    .vna-label {
+      position: absolute; top: 1rem; padding: 0.3rem 0.85rem;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; border-radius: 100px; pointer-events: none;
+      backdrop-filter: blur(4px);
+    }
+    .vna-label-voor { left: 1rem; background: rgba(0,0,0,0.45); color: #fff; }
+    .vna-label-na   { right: 1rem; background: #2D3E2A; color: #fff; }
+    .vna-skeleton {
+      position: absolute; inset: 0;
+      background: linear-gradient(90deg, #eae4d4 25%, #d8d1be 50%, #eae4d4 75%);
+      background-size: 200% 100%; animation: vnaShimmer 1.4s infinite;
+      border-radius: 12px; transition: opacity 0.4s;
+    }
+    .vna-skeleton.gone { opacity: 0; pointer-events: none; }
+    @keyframes vnaShimmer { from { background-position: 200% 0; } to { background-position: -200% 0; } }
+    .vna-projects-label {
+      margin-top: 1.75rem; margin-bottom: 0.75rem;
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--color-muted, #888);
+    }
+    .vna-projects { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 0.75rem; }
+    @media (max-width: 540px) {
+      .vna-wrap { aspect-ratio: 4/3; }
+      .vna-projects { grid-template-columns: repeat(3, 1fr); }
+      .vna-project-btn span { font-size: 0.7rem; }
+    }
+    .vna-project-btn {
+      all: unset; cursor: pointer; border-radius: 10px; overflow: hidden;
+      border: 2px solid transparent; transition: border-color 0.2s, transform 0.15s;
+      background: #fff; box-shadow: 0 2px 8px rgba(45,62,42,0.1);
+    }
+    .vna-project-btn:hover { transform: translateY(-2px); }
+    .vna-project-btn.active { border-color: #2D3E2A; }
+    .vna-project-btn img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; }
+    .vna-project-btn span {
+      display: block; padding: 0.45rem 0.6rem;
+      font-size: 0.78rem; color: var(--color-muted, #888); line-height: 1.3;
+    }
+    .vna-project-btn.active span { color: #2D3E2A; font-weight: 600; }
+
+    /* ===== MASONRY GRID ===== */
+    .masonry-sectie {
+      background: var(--color-white);
+      padding: 5rem 0;
+    }
+
+    .filter-bar {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .filter-btn {
+      background: var(--color-cream);
+      border: 2px solid transparent;
+      color: var(--color-navy);
+      font-size: 0.85rem;
+      font-weight: 600;
+      padding: 0.5rem 1.2rem;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition), color var(--transition);
+      font-family: var(--font-body);
+    }
+
+    .filter-btn:hover {
+      background: #eaf5ec;
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    .filter-btn.active {
+      background: var(--color-primary);
+      color: #fff;
+      border-color: var(--color-primary);
+    }
+
+    /* Masonry kolommen via CSS columns */
+    .masonry-grid {
+      columns: 3;
+      column-gap: 1rem;
+    }
+
+    @media (max-width: 900px) { .masonry-grid { columns: 2; } }
+    @media (max-width: 540px) { .masonry-grid { columns: 1; } }
+
+    .masonry-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      border-radius: 14px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      display: block;
+    }
+
+    .masonry-item.hidden {
+      display: none;
+    }
+
+    .masonry-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .masonry-item:hover img { transform: scale(1.04); }
+
+    .masonry-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(27,43,58,0.75) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+
+    .masonry-item:hover .masonry-overlay { opacity: 1; }
+
+    .masonry-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    .masonry-cat {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-accent);
+    }
+
+    .masonry-zoom {
+      width: 32px;
+      height: 32px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1rem;
+    }
+
+    /* Lightbox hergebruikt van main CSS */
+
+    /* ===== CTA ===== */
+    .portfolio-cta {
+      background: var(--color-primary);
+      padding: 4rem 0;
+      text-align: center;
+    }
+
+    .portfolio-cta h2 { color: #fff; margin-bottom: 0.75rem; }
+    .portfolio-cta p  { color: rgba(204,242,217,1); margin: 0 auto 2rem; text-align: center; }
+    .portfolio-cta .btn { background: #fff; color: var(--color-primary); font-weight: 700; }
+    .portfolio-cta .btn:hover { background: var(--color-cream); }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATIE ===== -->
+  <nav class="nav transparent" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="img/logo.png" alt="Tuinbazen logo" class="nav-logo-img">
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html"      class="nav-link">Home</a></li>
+        <li class="has-dropdown">
+          <a href="diensten.html" class="nav-link">Diensten <span class="dd-arrow">▾</span></a>
+          <ul class="nav-dropdown">
+            <li class="dd-all"><a href="diensten.html">Alle diensten →</a></li>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </li>
+        <li><a href="portfolio.html"  class="nav-link active">Projecten</a></li>
+        <li><a href="reviews.html"    class="nav-link">Reviews</a></li>
+        <li><a href="contact.html"    class="nav-link">Contact</a></li>
+        <li><a href="contact.html"    class="nav-link nav-cta">Offerte aanvragen</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="portfolio-hero">
+    <div class="container">
+      <span class="section-label">Ons werk</span>
+      <h1>Projecten die verbazen</h1>
+      <p>Van terras tot gazon, een selectie van wat wij voor onze klanten hebben gerealiseerd.</p>
+    </div>
+  </section>
+
+  <!-- ===== VOOR / NA SLIDER ===== -->
+  <section class="vna-section">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Onze resultaten</span>
+        <h2>Zie het verschil</h2>
+        <p>Sleep de schuifbalk om voor en na te vergelijken.</p>
+      </div>
+      <p class="vna-hint" id="vnaHint">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/></svg>
+        Sleep de balk om voor en na te vergelijken
+      </p>
+      <div class="vna-wrap" id="vnaWrap" role="img" aria-label="Voor en na vergelijking tuinproject">
+        <div class="vna-skeleton" id="vnaSkeleton"></div>
+        <img class="vna-img vna-before" id="vnaBefore" alt="Voor">
+        <img class="vna-img vna-after"  id="vnaAfter"  alt="Na">
+        <div class="vna-divider" id="vnaDivider">
+          <div class="vna-handle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#2D3E2A" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l-6-6 6-6"/><path d="M15 6l6 6-6 6"/></svg>
+          </div>
+        </div>
+        <span class="vna-label vna-label-voor">Voor</span>
+        <span class="vna-label vna-label-na">Na</span>
+      </div>
+      <p class="vna-projects-label">Kies een project</p>
+      <div class="vna-projects" id="vnaProjects"></div>
+    </div>
+  </section>
+
+  <!-- ===== MASONRY PORTFOLIO ===== -->
+  <section class="masonry-sectie">
+    <div class="container">
+
+      <div class="section-header reveal">
+        <h2>Alle projecten</h2>
+        <p>Filter op categorie of bekijk het volledige overzicht.</p>
+      </div>
+
+      <div class="filter-bar reveal">
+        <button class="filter-btn active" data-filter="all">Alles</button>
+        <button class="filter-btn" data-filter="terras">Terras</button>
+        <button class="filter-btn" data-filter="oprit">Oprit</button>
+        <button class="filter-btn" data-filter="kasseien">Kasseien</button>
+        <button class="filter-btn" data-filter="gazon">Gazon</button>
+        <button class="filter-btn" data-filter="tuinaanleg">Tuinaanleg</button>
+        <button class="filter-btn" data-filter="grondverzet">Grondverzet</button>
+        <button class="filter-btn" data-filter="schutting">Schutting</button>
+        <button class="filter-btn" data-filter="vlonder">Vlonder</button>
+      </div>
+
+      <div class="masonry-grid" id="masonry-grid">
+
+        <div class="masonry-item" data-cat="terras" data-lightbox="Complete tuin-make-over">
+          <img src="img/portfolio/terras-makeover.webp" alt="Complete tuin-make-over, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Terras</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Oprit in klinkers">
+          <img src="img/portfolio/oprit-klinkers.webp" alt="Oprit in klinkers, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Slingerend kasseienpad">
+          <img src="img/portfolio/kasseien-pad.webp" alt="Slingerend kasseienpad, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="gazon" data-lightbox="Nieuw aangelegd gazon">
+          <img src="img/portfolio/gazon-aangelegd.webp" alt="Nieuw aangelegd gazon, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Gazon</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Weelderige beplanting">
+          <img src="img/portfolio/tuinontwerp-beplanting.webp" alt="Weelderige beplanting, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Grondwerk met graafmachine">
+          <img src="img/portfolio/grondverzet-graafmachine.webp" alt="Grondwerk met graafmachine, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="schutting" data-lightbox="Nieuwe schutting">
+          <img src="img/portfolio/schutting-nieuw.webp" alt="Nieuwe schutting, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Schutting</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="vlonder" data-lightbox="Houten vlonder">
+          <img src="img/portfolio/vlonder-rood.webp" alt="Houten vlonder, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Vlonder</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="terras" data-lightbox="Antraciet terras in visgraat">
+          <img src="img/portfolio/terras-visgraat.webp" alt="Antraciet terras in visgraat, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Terras</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Bestrate binnenplaats">
+          <img src="img/portfolio/oprit-courtyard.webp" alt="Bestrate binnenplaats, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Kasseienpad naar tuinhuis">
+          <img src="img/portfolio/kasseien-pad2.webp" alt="Kasseienpad naar tuinhuis, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="gazon" data-lightbox="Gazon met tegelpad">
+          <img src="img/portfolio/hero-tuin.webp" alt="Gazon met tegelpad, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Gazon</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Volle groene tuin">
+          <img src="img/portfolio/onderhoud-beplanting.webp" alt="Volle groene tuin, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Uitgraven naast de woning">
+          <img src="img/portfolio/grondverzet-kubota.webp" alt="Uitgraven naast de woning, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="schutting" data-lightbox="Houten schutting">
+          <img src="img/portfolio/schutting-hout.webp" alt="Houten schutting, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Schutting</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="terras" data-lightbox="Strak grijs terras">
+          <img src="img/portfolio/terras-grijs.webp" alt="Strak grijs terras, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Terras</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Ruime bestrating">
+          <img src="img/portfolio/oprit-plein.webp" alt="Ruime bestrating, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Kasseien bij vakwerkhuis">
+          <img src="img/portfolio/kasseien-vakwerk.webp" alt="Kasseien bij vakwerkhuis, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="gazon" data-lightbox="Vers gazon">
+          <img src="img/portfolio/gazon-sproeier.webp" alt="Vers gazon, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Gazon</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Border met Japanse esdoorn">
+          <img src="img/portfolio/tuin-esdoorn.webp" alt="Border met Japanse esdoorn, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Grond afvoeren">
+          <img src="img/portfolio/grondverzet-dumper.webp" alt="Grond afvoeren, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="terras" data-lightbox="Terras met kasseien">
+          <img src="img/portfolio/terras-kasseien.webp" alt="Terras met kasseien, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Terras</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Oprit in aanleg">
+          <img src="img/portfolio/oprit-aanleg.webp" alt="Oprit in aanleg, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Kasseien in aanleg">
+          <img src="img/portfolio/kasseien-vakwerk2.webp" alt="Kasseien in aanleg, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="gazon" data-lightbox="Graszoden leggen">
+          <img src="img/portfolio/gazon-graszoden.webp" alt="Graszoden leggen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Gazon</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Groene tuinborder">
+          <img src="img/portfolio/tuinontwerp-hero.webp" alt="Groene tuinborder, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Terrein uitgraven">
+          <img src="img/portfolio/grondverzet-uitgraven.webp" alt="Terrein uitgraven, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="terras" data-lightbox="Tegelpad langs de woning">
+          <img src="img/portfolio/pad-tegels.webp" alt="Tegelpad langs de woning, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Terras</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Bestrating leggen">
+          <img src="img/portfolio/oprit-aanleg2.webp" alt="Bestrating leggen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Kasseien leggen">
+          <img src="img/portfolio/kasseien-leggen.webp" alt="Kasseien leggen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="gazon" data-lightbox="Strak gazon">
+          <img src="img/portfolio/gazon-tuin.webp" alt="Strak gazon, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Gazon</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Voortuin met grind">
+          <img src="img/portfolio/voortuin-grind.webp" alt="Voortuin met grind, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Keermuur bouwen">
+          <img src="img/portfolio/grondverzet-keermuur.webp" alt="Keermuur bouwen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Bestrating tegen de gevel">
+          <img src="img/portfolio/oprit-aanleg3.webp" alt="Bestrating tegen de gevel, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Kasseien met tegelvlak">
+          <img src="img/portfolio/kasseien-leggen2.webp" alt="Kasseien met tegelvlak, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Voortuin met stapstenen">
+          <img src="img/portfolio/voortuin-stapstenen.webp" alt="Voortuin met stapstenen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Keermuur in aanleg">
+          <img src="img/portfolio/grondverzet-keermuur2.webp" alt="Keermuur in aanleg, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="oprit" data-lightbox="Zandbed voor bestrating">
+          <img src="img/portfolio/oprit-zandbed.webp" alt="Zandbed voor bestrating, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Oprit</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="kasseien" data-lightbox="Oude kasseien herlegd">
+          <img src="img/portfolio/kasseien-winter.webp" alt="Oude kasseien herlegd, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Kasseien</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Aangelegde voortuin">
+          <img src="img/portfolio/voortuin-grind2.webp" alt="Aangelegde voortuin, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Drainage aanleggen">
+          <img src="img/portfolio/grondverzet-drainage.webp" alt="Drainage aanleggen, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Siertuin met grind">
+          <img src="img/portfolio/sierbestrating-grind.webp" alt="Siertuin met grind, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Tuin voor aanvang">
+          <img src="img/portfolio/grondverzet-voor.webp" alt="Tuin voor aanvang, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="tuinaanleg" data-lightbox="Grindtuin met beplanting">
+          <img src="img/portfolio/siertuin-grind.webp" alt="Grindtuin met beplanting, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Tuinaanleg</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="masonry-item" data-cat="grondverzet" data-lightbox="Tuinpad in aanleg">
+          <img src="img/portfolio/pad-aanleg.webp" alt="Tuinpad in aanleg, Tuinbazen" loading="lazy">
+          <div class="masonry-overlay">
+            <div class="masonry-info">
+              <span class="masonry-cat">Grondverzet</span>
+              <span class="masonry-zoom">⤢</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto vergroot">
+    <button class="lightbox-close" id="lightbox-close" aria-label="Sluiten">✕</button>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="Vorige">‹</button>
+    <button class="lightbox-next" id="lightbox-next" aria-label="Volgende">›</button>
+    <div class="lightbox-inner">
+      <div class="lightbox-img-wrap">
+        <img src="" alt="" id="lightbox-img">
+      </div>
+      <p class="lightbox-caption" id="lightbox-caption"></p>
+      <p class="lightbox-counter" id="lightbox-counter"></p>
+    </div>
+    <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+  </div>
+
+  <!-- ===== CTA ===== -->
+  <section class="portfolio-cta">
+    <div class="container">
+      <h2>Jouw tuin als volgend project?</h2>
+      <p>Vraag vandaag nog vrijblijvend een offerte aan.</p>
+      <a href="contact.html" class="btn">Offerte aanvragen →</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Tuinbazen</div>
+          <p class="footer-tagline">Vakkundig hovenierswerk in Zuid-Limburg, van ontwerp tot oplevering.</p>
+          <div class="footer-contact-info">
+            <a href="tel:+31642074998">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.41 2 2 0 0 1 3.62 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +31 6 42 07 49 98
+            </a>
+            <a href="mailto:vandenbergdennis2@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              vandenbergdennis2@gmail.com
+            </a>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zuid-Limburg
+            </span>
+          </div>
+          <a href="contact.html" class="footer-offerte">Offerte aanvragen →</a>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="portfolio.html">Projecten</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Diensten</h4>
+          <ul>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span class="footer-copy">© 2026 Tuinbazen, Alle rechten voorbehouden</span>
+        <a href="contact.html" class="footer-cta-link">Offerte aanvragen →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function(){
+    /* ── Voor & Na slider ── */
+    (function() {
+      const projects = [
+        { name: 'Tuin-make-over',  before: 'img/portfolio/terras-makeover-voor.jpg', after: 'img/portfolio/terras-makeover.webp', thumb: 'img/portfolio/terras-makeover.webp' },
+        { name: 'Bestrate binnenplaats', before: 'img/portfolio/oprit-aanleg.webp', after: 'img/portfolio/oprit-klinkers.webp', thumb: 'img/portfolio/oprit-klinkers.webp' },
+      ];
+      let pct = 50, dragging = false, hintHidden = false;
+      const wrap    = document.getElementById('vnaWrap');
+      const before  = document.getElementById('vnaBefore');
+      const after   = document.getElementById('vnaAfter');
+      const divider = document.getElementById('vnaDivider');
+      const skeleton= document.getElementById('vnaSkeleton');
+      const hint    = document.getElementById('vnaHint');
+      const list    = document.getElementById('vnaProjects');
+      if (!wrap) return;
+
+      function apply(x) {
+        const r = wrap.getBoundingClientRect();
+        pct = Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100));
+        after.style.clipPath = `inset(0 0 0 ${pct.toFixed(2)}%)`;
+        divider.style.left   = pct.toFixed(2) + '%';
+      }
+      function hideHint() { if (!hintHidden) { hintHidden=true; hint.classList.add('hidden'); } }
+      wrap.addEventListener('mousedown', e => { dragging=true; apply(e.clientX); hideHint(); });
+      window.addEventListener('mousemove', e => { if (dragging) apply(e.clientX); });
+      window.addEventListener('mouseup', () => { dragging=false; });
+      wrap.addEventListener('touchstart', e => { dragging=true; apply(e.touches[0].clientX); hideHint(); }, {passive:true});
+      window.addEventListener('touchmove', e => { if (dragging) apply(e.touches[0].clientX); }, {passive:true});
+      window.addEventListener('touchend', () => { dragging=false; });
+
+      function load(i) {
+        const p = projects[i]; let n = 0;
+        skeleton.classList.remove('gone');
+        pct=50; after.style.clipPath='inset(0 0 0 50%)'; divider.style.left='50%';
+        function onLoaded() { if (++n>=2) skeleton.classList.add('gone'); }
+        before.onload=onLoaded; after.onload=onLoaded;
+        before.src=p.before; after.src=p.after;
+        // Cached images won't fire onload, check immediately
+        if (before.complete) onLoaded();
+        if (after.complete) onLoaded();
+        // Fallback: hide skeleton after 3s regardless
+        setTimeout(() => skeleton.classList.add('gone'), 3000);
+        list.querySelectorAll('.vna-project-btn').forEach((b,j)=>b.classList.toggle('active',j===i));
+      }
+      projects.forEach((p,i) => {
+        const btn = document.createElement('button');
+        btn.className = 'vna-project-btn' + (i===0?' active':'');
+        btn.innerHTML = `<img src="${p.thumb}" alt="${p.name}" loading="lazy"><span>${p.name}</span>`;
+        btn.addEventListener('click', () => load(i));
+        list.appendChild(btn);
+      });
+      load(0);
+    })();
+
+    /* ===== FILTER ===== */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const items      = document.querySelectorAll('.masonry-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const cat = btn.dataset.filter;
+        items.forEach(item => {
+          const match = cat === 'all' || item.dataset.cat === cat;
+          item.classList.toggle('hidden', !match);
+        });
+      });
+    });
+
+    /* ===== LIGHTBOX (masonry) ===== */
+    const lightbox      = document.getElementById('lightbox');
+    const lightboxImg   = document.getElementById('lightbox-img');
+    const lightboxCap   = document.getElementById('lightbox-caption');
+    const lightboxCount = document.getElementById('lightbox-counter');
+    const lightboxThumbs= document.getElementById('lightbox-thumbs');
+    const lbClose       = document.getElementById('lightbox-close');
+    const lbPrev        = document.getElementById('lightbox-prev');
+    const lbNext        = document.getElementById('lightbox-next');
+
+    let lbItems  = [];
+    let lbCurrent = 0;
+
+    function buildLbItems() {
+      lbItems = Array.from(document.querySelectorAll('.masonry-item:not(.hidden)'));
+      lightboxThumbs.innerHTML = '';
+      lbItems.forEach((item, i) => {
+        const src = item.querySelector('img').src;
+        const alt = item.querySelector('img').alt;
+        const th  = document.createElement('div');
+        th.className = 'lightbox-thumb';
+        th.innerHTML = `<img src="${src}" alt="${alt}">`;
+        th.addEventListener('click', () => lbGo(i));
+        lightboxThumbs.appendChild(th);
+      });
+    }
+
+    function lbGo(index) {
+      lbCurrent = (index + lbItems.length) % lbItems.length;
+      const item = lbItems[lbCurrent];
+      const img  = item.querySelector('img');
+      lightboxImg.classList.add('lb-loading');
+      lightboxImg.onload = () => lightboxImg.classList.remove('lb-loading');
+      lightboxImg.src = img.src;
+      lightboxImg.alt = img.alt;
+      lightboxCap.textContent   = item.dataset.lightbox || '';
+      lightboxCount.textContent = `${lbCurrent + 1} / ${lbItems.length}`;
+      lightboxThumbs.querySelectorAll('.lightbox-thumb').forEach((t, i) =>
+        t.classList.toggle('active', i === lbCurrent)
+      );
+    }
+
+    function openLb(index) {
+      buildLbItems();
+      lbGo(index);
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLb() {
+      lightbox.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    items.forEach((item, i) => {
+      item.addEventListener('click', () => {
+        const visible = Array.from(document.querySelectorAll('.masonry-item:not(.hidden)'));
+        openLb(visible.indexOf(item));
+      });
+    });
+
+    lbClose.addEventListener('click', closeLb);
+    lbPrev.addEventListener('click',  () => lbGo(lbCurrent - 1));
+    lbNext.addEventListener('click',  () => lbGo(lbCurrent + 1));
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLb(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lightbox.classList.contains('open')) return;
+      if (e.key === 'Escape')     closeLb();
+      if (e.key === 'ArrowLeft')  lbGo(lbCurrent - 1);
+      if (e.key === 'ArrowRight') lbGo(lbCurrent + 1);
+    });
+
+    let lbTouchX = 0;
+    lightbox.addEventListener('touchstart', e => { lbTouchX = e.touches[0].clientX; }, { passive: true });
+    lightbox.addEventListener('touchend',   e => {
+      const diff = lbTouchX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 40) lbGo(diff > 0 ? lbCurrent + 1 : lbCurrent - 1);
+    });
+  })();
+  </script>
+</body>
+</html>

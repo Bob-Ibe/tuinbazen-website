@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UI · Statustellers</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --green:  #1B6B35;
+      --green2: #3D9E48;
+      --navy:   #1C2B3A;
+      --cream:  #F5F0E8;
+    }
+
+    body {
+      font-family: system-ui, sans-serif;
+      background: #f0ede8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+      padding: 4rem 1.5rem;
+    }
+
+    /* ─────────────────────────────────────────
+       VARIANT A — donkere balk (voor op hero of
+       als standalone sectie op witte achtergrond)
+    ───────────────────────────────────────── */
+    .stats-dark {
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-dark {
+      text-align: center;
+      padding: 1rem 1.5rem;
+      position: relative;
+    }
+
+    .stat-dark:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 20%;
+      height: 60%;
+      width: 1px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    .stat-dark .number {
+      font-family: Georgia, serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .stat-dark .suffix {
+      font-size: 0.6em;
+      color: var(--green2);
+      font-weight: 700;
+    }
+
+    .stat-dark .label {
+      margin-top: 0.5rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─────────────────────────────────────────
+       VARIANT B — cream sectie met iconen
+    ───────────────────────────────────────── */
+    .stats-cream {
+      background: var(--cream);
+      border-radius: 20px;
+      padding: 3.5rem 2rem;
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .stat-cream {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      background: #fff;
+      border-radius: 14px;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .stat-cream:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(27,107,53,0.12);
+    }
+
+    .stat-cream .icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      background: #eaf5ec;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+    }
+
+    .stat-cream .icon svg {
+      width: 24px;
+      height: 24px;
+      stroke: var(--green);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .stat-cream .number {
+      font-family: Georgia, serif;
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .stat-cream .suffix {
+      font-size: 0.6em;
+      color: var(--green2);
+      font-weight: 700;
+    }
+
+    .stat-cream .label {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    /* ─────────────────────────────────────────
+       VARIANT C — groen / accent (hero overlay)
+    ───────────────────────────────────────── */
+    .stats-green {
+      background: var(--green);
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      width: 100%;
+      max-width: 860px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .stat-green {
+      text-align: center;
+      padding: 1rem 1rem;
+      position: relative;
+    }
+
+    .stat-green:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: rgba(255,255,255,0.18);
+    }
+
+    .stat-green .number {
+      font-family: Georgia, serif;
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 2px;
+    }
+
+    .stat-green .suffix {
+      font-size: 0.58em;
+      color: rgba(180,235,195,1);
+      font-weight: 700;
+    }
+
+    .stat-green .label {
+      margin-top: 0.45rem;
+      font-size: 0.78rem;
+      color: rgba(180,235,195,0.85);
+      letter-spacing: 0.03em;
+    }
+
+    /* ─── Responsive alle varianten ─── */
+    @media (max-width: 640px) {
+      .stats-dark,
+      .stats-cream,
+      .stats-green {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .stat-dark:nth-child(2)::after,
+      .stat-green:nth-child(2)::after { display: none; }
+    }
+
+    @media (max-width: 360px) {
+      .stats-dark,
+      .stats-cream,
+      .stats-green {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* Sectie label boven elke variant */
+    .variant-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #aaa;
+      text-align: center;
+      margin-bottom: -3rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Variant A -->
+  <p class="variant-label">Variant A — donker</p>
+  <div class="stats-dark">
+    <div class="stat-dark">
+      <div class="number">
+        <span class="count" data-target="250">0</span>
+        <span class="suffix">+</span>
+      </div>
+      <div class="label">Projecten afgerond</div>
+    </div>
+    <div class="stat-dark">
+      <div class="number">
+        <span class="count" data-target="10">0</span>
+        <span class="suffix">+ jr</span>
+      </div>
+      <div class="label">Ervaring</div>
+    </div>
+    <div class="stat-dark">
+      <div class="number">
+        <span class="count" data-target="98">0</span>
+        <span class="suffix">%</span>
+      </div>
+      <div class="label">Tevreden klanten</div>
+    </div>
+    <div class="stat-dark">
+      <div class="number">
+        <span class="count" data-target="5">0</span>
+        <span class="suffix">★</span>
+      </div>
+      <div class="label">Gemiddelde score</div>
+    </div>
+  </div>
+
+  <!-- Variant B -->
+  <p class="variant-label">Variant B — cream met iconen</p>
+  <div class="stats-cream">
+    <div class="stat-cream">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </div>
+      <div class="number">
+        <span class="count" data-target="250">0</span>
+        <span class="suffix">+</span>
+      </div>
+      <div class="label">Projecten afgerond</div>
+    </div>
+    <div class="stat-cream">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <div class="number">
+        <span class="count" data-target="10">0</span>
+        <span class="suffix">+ jr</span>
+      </div>
+      <div class="label">Jaar ervaring</div>
+    </div>
+    <div class="stat-cream">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      </div>
+      <div class="number">
+        <span class="count" data-target="98">0</span>
+        <span class="suffix">%</span>
+      </div>
+      <div class="label">Tevreden klanten</div>
+    </div>
+    <div class="stat-cream">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><polyline points="22 2 11 13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </div>
+      <div class="number">
+        <span class="count" data-target="48">0</span>
+        <span class="suffix">u</span>
+      </div>
+      <div class="label">Reactietijd gegarandeerd</div>
+    </div>
+  </div>
+
+  <!-- Variant C -->
+  <p class="variant-label">Variant C — groen</p>
+  <div class="stats-green">
+    <div class="stat-green">
+      <div class="number">
+        <span class="count" data-target="250">0</span>
+        <span class="suffix">+</span>
+      </div>
+      <div class="label">Projecten afgerond</div>
+    </div>
+    <div class="stat-green">
+      <div class="number">
+        <span class="count" data-target="10">0</span>
+        <span class="suffix">+ jr</span>
+      </div>
+      <div class="label">Jaar ervaring</div>
+    </div>
+    <div class="stat-green">
+      <div class="number">
+        <span class="count" data-target="98">0</span>
+        <span class="suffix">%</span>
+      </div>
+      <div class="label">Tevreden klanten</div>
+    </div>
+    <div class="stat-green">
+      <div class="number">
+        <span class="count" data-target="5">0</span>
+        <span class="suffix">★</span>
+      </div>
+      <div class="label">Gemiddelde score</div>
+    </div>
+  </div>
+
+<script>
+  /* Count-up via IntersectionObserver — start als element in beeld komt */
+  function easeOutQuart(t) {
+    return 1 - Math.pow(1 - t, 4);
+  }
+
+  function animateCount(el) {
+    const target   = parseInt(el.dataset.target, 10);
+    const duration = target >= 100 ? 1800 : target >= 10 ? 1200 : 800;
+    const start    = performance.now();
+
+    function step(now) {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased    = easeOutQuart(progress);
+      el.textContent = Math.round(eased * target);
+      if (progress < 1) requestAnimationFrame(step);
+      else el.textContent = target;
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll('.count').forEach(animateCount);
+      observer.unobserve(entry.target);
+    });
+  }, { threshold: 0.4 });
+
+  document.querySelectorAll('.stats-dark, .stats-cream, .stats-green')
+    .forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

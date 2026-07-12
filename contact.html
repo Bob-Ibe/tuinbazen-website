@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Neem contact op met Tuinbazen – vrijblijvend een offerte aanvragen voor jouw tuin in Zuid-Limburg.">
+  <!-- Social sharing (Open Graph / Twitter). Zet bij livegang het volledige domein vóór de relatieve paden voor optimale weergave. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tuinbazen">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="Contact – Tuinbazen | Zuid-Limburg">
+  <meta property="og:description" content="Neem contact op met Tuinbazen – vrijblijvend een offerte aanvragen voor jouw tuin in Zuid-Limburg.">
+  <meta property="og:image" content="img/portfolio/hero-siertuin.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact – Tuinbazen | Zuid-Limburg">
+  <meta name="twitter:description" content="Neem contact op met Tuinbazen – vrijblijvend een offerte aanvragen voor jouw tuin in Zuid-Limburg.">
+  <meta name="twitter:image" content="img/portfolio/hero-siertuin.jpg">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#1B6B35">
+  <title>Contact – Tuinbazen | Zuid-Limburg</title>
+  <link rel="canonical" href="https://www.tuinbazen.nl/contact.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== CONTACT PAGINA ===== */
+    .contact-hero {
+      background: var(--color-navy);
+      padding: calc(var(--nav-height) + 4rem) 0 4rem;
+      text-align: center;
+    }
+
+    .contact-hero h1 {
+      color: var(--color-white);
+      margin-bottom: 1rem;
+    }
+
+    .contact-hero p {
+      color: rgba(255,255,255,0.65);
+      font-size: 1.05rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-body {
+      padding: 5rem 0;
+      background: var(--color-cream);
+    }
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 860px) {
+      .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    /* Info kolom */
+    .contact-info-col h2 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+      color: var(--color-navy);
+    }
+
+    .contact-info-col > p {
+      color: #666;
+      font-size: 0.95rem;
+      margin-bottom: 2rem;
+    }
+
+    .contact-details {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .contact-detail-icon {
+      width: 44px;
+      height: 44px;
+      background: #eaf5ec;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-detail-icon svg {
+      width: 20px;
+      height: 20px;
+      stroke: var(--color-primary);
+    }
+
+    .contact-detail-text strong {
+      display: block;
+      font-size: 0.82rem;
+      color: #999;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.15rem;
+    }
+
+    .contact-detail-text a,
+    .contact-detail-text span {
+      font-size: 0.95rem;
+      color: var(--color-navy);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color var(--transition);
+    }
+
+    .contact-detail-text a:hover { color: var(--color-primary); }
+
+    .contact-badge {
+      background: var(--color-primary);
+      color: var(--color-white);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .contact-badge p {
+      color: rgba(255,255,255,0.8);
+      font-size: 0.88rem;
+      margin: 0;
+      max-width: none;
+    }
+
+    .contact-badge strong {
+      display: block;
+      color: #fff;
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
+    }
+
+    /* Formulier */
+    .contact-form-col {
+      background: var(--color-white);
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    .contact-form-col h2 {
+      font-size: 1.35rem;
+      margin-bottom: 0.4rem;
+      color: var(--color-navy);
+    }
+
+    .contact-form-col > p {
+      color: #888;
+      font-size: 0.88rem;
+      margin-bottom: 2rem;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1rem;
+    }
+
+    @media (max-width: 540px) {
+      .form-grid { grid-template-columns: 1fr; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-group label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--color-navy);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      border: 1.5px solid #e5e2dc;
+      border-radius: 10px;
+      padding: 0.75rem 1rem;
+      font-size: 0.93rem;
+      font-family: var(--font-body);
+      color: var(--color-dark);
+      background: #fafaf8;
+      transition: border-color var(--transition), box-shadow var(--transition);
+      outline: none;
+      width: 100%;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 3px rgba(27,107,53,0.1);
+      background: #fff;
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .form-group select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      background-size: 16px;
+      padding-right: 2.5rem;
+    }
+
+    .form-submit {
+      margin-top: 1.5rem;
+    }
+
+    .form-submit .btn {
+      width: 100%;
+      justify-content: center;
+      font-size: 1rem;
+      padding: 0.95rem;
+    }
+
+    .form-note {
+      margin-top: 0.75rem;
+      font-size: 0.78rem;
+      color: #aaa;
+      text-align: center;
+      max-width: none;
+    }
+
+    .form-status {
+      margin-top: 1rem;
+      padding: 0.9rem 1.1rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      text-align: center;
+      display: none;
+    }
+    .form-status.is-visible { display: block; }
+    .form-status.is-success {
+      background: #e8f5ec;
+      color: #1B6B35;
+      border: 1px solid #b7ddc2;
+    }
+    .form-status.is-error {
+      background: #fdecec;
+      color: #b3261e;
+      border: 1px solid #f3c2c0;
+    }
+    #contact-submit[disabled] { opacity: 0.6; cursor: default; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATIE ===== -->
+  <nav class="nav transparent" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="img/logo.png" alt="Tuinbazen logo" class="nav-logo-img">
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html"      class="nav-link">Home</a></li>
+        <li class="has-dropdown">
+          <a href="diensten.html" class="nav-link">Diensten <span class="dd-arrow">▾</span></a>
+          <ul class="nav-dropdown">
+            <li class="dd-all"><a href="diensten.html">Alle diensten →</a></li>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </li>
+        <li><a href="portfolio.html"  class="nav-link">Projecten</a></li>
+        <li><a href="reviews.html"    class="nav-link">Reviews</a></li>
+        <li><a href="contact.html"    class="nav-link active">Contact</a></li>
+        <li><a href="contact.html"    class="nav-link nav-cta">Offerte aanvragen</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="contact-hero">
+    <div class="container">
+      <span class="section-label">Gratis en vrijblijvend</span>
+      <h1>Neem contact op</h1>
+      <p>Vertel ons wat je in gedachten hebt, wij reageren binnen één werkdag.</p>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT BODY ===== -->
+  <section class="contact-body">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- Info kolom -->
+        <div class="contact-info-col reveal">
+          <h2>Direct bereikbaar</h2>
+          <p>Liever bellen of mailen? Geen probleem. Wij zijn door de week bereikbaar en reageren altijd snel.</p>
+
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.41 2 2 0 0 1 3.62 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <strong>Telefoon</strong>
+                <a href="tel:+31642074998">+31 6 42 07 49 98</a>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <strong>E-mail</strong>
+                <a href="mailto:vandenbergdennis2@gmail.com">vandenbergdennis2@gmail.com</a>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <strong>Werkgebied</strong>
+                <span>Zuid-Limburg en omgeving</span>
+              </div>
+            </div>
+
+            <div class="contact-detail">
+              <div class="contact-detail-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              </div>
+              <div class="contact-detail-text">
+                <strong>Reactietijd</strong>
+                <span>Binnen 1 werkdag</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="contact-badge">
+            <strong>✓ Gratis en vrijblijvend</strong>
+            <p>Een offerte aanvragen kost niets en verplicht je tot niets. Wij komen graag langs voor een kennismakingsgesprek.</p>
+          </div>
+        </div>
+
+        <!-- Formulier kolom -->
+        <div class="contact-form-col reveal reveal-delay-1">
+          <h2>Stuur ons een bericht</h2>
+          <p>Vul het formulier in en wij nemen zo snel mogelijk contact met je op.</p>
+
+          <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
+            <!-- ════════════════════════════════════════════════════════════
+                 WEB3FORMS - gratis formulier-naar-e-mail (geen backend nodig)
+                 ────────────────────────────────────────────────────────────
+                 ZO ZET JE 'M WERKEND (eenmalig, ~1 min):
+                   1. Ga naar https://web3forms.com en vul je e-mailadres in:
+                      vandenbergdennis2@gmail.com -> klik "Create Access Key".
+                   2. Je ontvangt direct een access key in je mailbox.
+                   3. Plak die key hieronder in value="..." (vervang de placeholder).
+                 Daarna komen alle aanvragen binnen op dat e-mailadres.
+                 ════════════════════════════════════════════════════════════ -->
+            <input type="hidden" name="access_key" value="PLAK-HIER-JE-WEB3FORMS-ACCESS-KEY">
+            <input type="hidden" name="subject" value="Nieuwe aanvraag via Tuinbazen website">
+            <input type="hidden" name="from_name" value="Tuinbazen website">
+            <!-- Honeypot tegen spam (blijft leeg/verborgen) -->
+            <input type="checkbox" name="botcheck" style="display:none;" tabindex="-1" autocomplete="off">
+
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="naam">Naam *</label>
+                <input type="text" id="naam" name="naam" placeholder="Jan Janssen" required>
+              </div>
+
+              <div class="form-group">
+                <label for="telefoon">Telefoon</label>
+                <input type="tel" id="telefoon" name="telefoon" placeholder="+31 6 12 34 56 78">
+              </div>
+
+              <div class="form-group full">
+                <label for="email">E-mailadres *</label>
+                <input type="email" id="email" name="email" placeholder="jan@voorbeeld.nl" required>
+              </div>
+
+              <div class="form-group full">
+                <label for="dienst">Waar gaat het om?</label>
+                <select id="dienst" name="dienst">
+                  <option value="">Selecteer een dienst…</option>
+                  <option value="Tuinontwerp">Tuinontwerp</option>
+                  <option value="Terras">Terras</option>
+                  <option value="Grondverzet">Grondverzet</option>
+                  <option value="Tuinonderhoud">Tuinonderhoud</option>
+                  <option value="Oprit">Oprit</option>
+                  <option value="Gazon">Gazon</option>
+                  <option value="Vlonder">Vlonder</option>
+                  <option value="Schutting">Schutting</option>
+                  <option value="Anders / combinatie">Anders / combinatie</option>
+                </select>
+              </div>
+
+              <div class="form-group full">
+                <label for="bericht">Jouw bericht *</label>
+                <textarea id="bericht" name="bericht" placeholder="Vertel ons kort wat je in gedachten hebt, locatie, wensen, oppervlakte…" required></textarea>
+              </div>
+            </div>
+
+            <div class="form-group full">
+              <label for="kennismaking-datum">Voorkeursdatum kennismakingsgesprek</label>
+              <input type="date" id="kennismaking-datum" name="kennismaking_datum" min="">
+            </div>
+            <div class="form-group full">
+              <label for="kennismaking-tijd">Voorkeurstijd</label>
+              <select id="kennismaking-tijd" name="kennismaking_tijd">
+                <option value="">-- Kies een tijd --</option>
+                <option value="08:00">08:00 – 09:00</option>
+                <option value="09:00">09:00 – 10:00</option>
+                <option value="10:00">10:00 – 11:00</option>
+                <option value="11:00">11:00 – 12:00</option>
+                <option value="13:00">13:00 – 14:00</option>
+                <option value="14:00">14:00 – 15:00</option>
+                <option value="15:00">15:00 – 16:00</option>
+                <option value="16:00">16:00 – 17:00</option>
+              </select>
+            </div>
+            <p class="kennismaking-info full">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+              Wij nemen binnen 24 uur contact op om de afspraak te bevestigen via vandenbergdennis2@gmail.com
+            </p>
+
+            <div class="form-submit">
+              <button type="submit" class="btn btn-primary" id="contact-submit">Verstuur aanvraag →</button>
+            </div>
+            <div id="form-status" class="form-status" role="status" aria-live="polite"></div>
+            <p class="form-note">Door dit formulier in te sturen ga je akkoord met het verwerken van je gegevens voor het beantwoorden van jouw aanvraag.</p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Tuinbazen</div>
+          <p class="footer-tagline">Vakkundig hovenierswerk in Zuid-Limburg, van ontwerp tot oplevering.</p>
+          <div class="footer-contact-info">
+            <a href="tel:+31642074998">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.41 2 2 0 0 1 3.62 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +31 6 42 07 49 98
+            </a>
+            <a href="mailto:vandenbergdennis2@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              vandenbergdennis2@gmail.com
+            </a>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zuid-Limburg
+            </span>
+          </div>
+          <a href="contact.html" class="footer-offerte">Offerte aanvragen →</a>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="portfolio.html">Projecten</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Diensten</h4>
+          <ul>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span class="footer-copy">© 2026 Tuinbazen, Alle rechten voorbehouden</span>
+        <a href="contact.html" class="footer-cta-link">Offerte aanvragen →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+  (function () {
+    // Minimumdatum voor het kennismakingsgesprek = vandaag
+    var datumInput = document.getElementById('kennismaking-datum');
+    if (datumInput) {
+      datumInput.setAttribute('min', new Date().toISOString().split('T')[0]);
+    }
+
+    // Contactformulier via Web3Forms (AJAX, blijft op de pagina)
+    var form = document.getElementById('contact-form');
+    var statusEl = document.getElementById('form-status');
+    var submitBtn = document.getElementById('contact-submit');
+    if (!form || !statusEl) return;
+
+    function showStatus(type, msg) {
+      statusEl.textContent = msg;
+      statusEl.classList.remove('is-success', 'is-error');
+      statusEl.classList.add('is-visible', type === 'success' ? 'is-success' : 'is-error');
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var keyField = form.querySelector('input[name="access_key"]');
+      if (keyField && keyField.value.indexOf('PLAK-HIER') !== -1) {
+        showStatus('error', 'Het formulier is nog niet geactiveerd: er ontbreekt een Web3Forms access key.');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      var originalLabel = submitBtn.textContent;
+      submitBtn.textContent = 'Versturen…';
+
+      var data = Object.fromEntries(new FormData(form).entries());
+
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      })
+        .then(function (res) { return res.json(); })
+        .then(function (result) {
+          if (result.success) {
+            showStatus('success', 'Bedankt voor je aanvraag! We nemen binnen 24 uur contact met je op.');
+            form.reset();
+          } else {
+            showStatus('error', 'Er ging iets mis bij het versturen. Probeer het later opnieuw of bel ons gerust.');
+          }
+        })
+        .catch(function () {
+          showStatus('error', 'Er ging iets mis bij het versturen. Controleer je internetverbinding en probeer het opnieuw.');
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalLabel;
+        });
+    });
+  })();
+  </script>
+</body>
+</html>

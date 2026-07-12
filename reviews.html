@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Lees wat klanten zeggen over Tuinbazen – beoordelingen van tuinprojecten in Zuid-Limburg.">
+  <!-- Social sharing (Open Graph / Twitter). Zet bij livegang het volledige domein vóór de relatieve paden voor optimale weergave. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Tuinbazen">
+  <meta property="og:locale" content="nl_NL">
+  <meta property="og:title" content="Reviews – Tuinbazen | Zuid-Limburg">
+  <meta property="og:description" content="Lees wat klanten zeggen over Tuinbazen – beoordelingen van tuinprojecten in Zuid-Limburg.">
+  <meta property="og:image" content="img/portfolio/hero-siertuin.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Reviews – Tuinbazen | Zuid-Limburg">
+  <meta name="twitter:description" content="Lees wat klanten zeggen over Tuinbazen – beoordelingen van tuinprojecten in Zuid-Limburg.">
+  <meta name="twitter:image" content="img/portfolio/hero-siertuin.jpg">
+  <link rel="icon" type="image/png" href="img/favicon.png">
+  <meta name="theme-color" content="#1B6B35">
+  <title>Reviews – Tuinbazen | Zuid-Limburg</title>
+  <link rel="canonical" href="https://www.tuinbazen.nl/reviews.html">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* ===== REVIEWS PAGINA ===== */
+    .reviews-hero {
+      background: var(--color-navy);
+      padding: calc(var(--nav-height) + 4rem) 0 4rem;
+      text-align: center;
+    }
+
+    .reviews-hero h1 { color: var(--color-white); margin-bottom: 1rem; }
+    .reviews-hero p  { color: rgba(255,255,255,0.65); font-size: 1.05rem; margin: 0 auto; text-align: center; }
+
+    /* Stat balk */
+    .reviews-stat-bar {
+      background: var(--color-primary);
+      padding: 2rem 0;
+    }
+
+    .reviews-stat-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .rs-item {
+      text-align: center;
+      color: #fff;
+    }
+
+    .rs-num {
+      font-family: var(--font-heading);
+      font-size: 2rem;
+      font-weight: 700;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+
+    .rs-label {
+      font-size: 0.82rem;
+      opacity: 0.75;
+    }
+
+    .rs-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255,255,255,0.2);
+    }
+
+    @media (max-width: 540px) {
+      .rs-divider { display: none; }
+      .reviews-stat-inner { gap: 1.5rem; }
+    }
+
+    /* Grid met reviews */
+    .reviews-page-body {
+      background: var(--color-cream);
+      padding: 5rem 0;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    @media (max-width: 900px) { .reviews-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 560px) { .reviews-grid { grid-template-columns: 1fr; } }
+
+    .review-card {
+      background: var(--color-white);
+      border-radius: 16px;
+      padding: 1.75rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      transition: transform 0.25s, box-shadow 0.25s;
+    }
+
+    .review-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .review-card-stars {
+      color: var(--color-primary);
+      font-size: 1rem;
+      letter-spacing: 2px;
+    }
+
+    .review-card-text {
+      font-size: 0.92rem;
+      color: #444;
+      line-height: 1.7;
+      font-style: italic;
+      flex: 1;
+      max-width: none;
+    }
+
+    .review-card-auteur {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid #f0ede8;
+    }
+
+    .review-card-av {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--color-primary);
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .review-card-auteur strong {
+      display: block;
+      font-size: 0.88rem;
+      color: var(--color-navy);
+    }
+
+    .review-card-auteur span {
+      font-size: 0.76rem;
+      color: #aaa;
+    }
+
+    /* Google Reviews widget sectie */
+    .google-reviews-sectie {
+      background: var(--color-white);
+      padding: 5rem 0;
+    }
+
+    .google-widget-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .google-badge {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      background: var(--color-cream);
+      border-radius: 16px;
+      padding: 1.5rem 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .google-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #4285F4;
+    }
+
+    .google-logo span:nth-child(1) { color: #4285F4; }
+    .google-logo span:nth-child(2) { color: #EA4335; }
+    .google-logo span:nth-child(3) { color: #FBBC05; }
+    .google-logo span:nth-child(4) { color: #4285F4; }
+    .google-logo span:nth-child(5) { color: #34A853; }
+    .google-logo span:nth-child(6) { color: #EA4335; }
+
+    .google-score {
+      text-align: center;
+    }
+
+    .google-score-num {
+      font-family: var(--font-heading);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--color-navy);
+      line-height: 1;
+    }
+
+    .google-score-stars {
+      color: #FBBC05;
+      font-size: 1.1rem;
+      letter-spacing: 2px;
+      margin: 0.2rem 0;
+    }
+
+    .google-score-label {
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .google-widget-embed {
+      width: 100%;
+      max-width: 900px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+    }
+
+    /* Placeholder voor widget, vervang door echte embed code */
+    .google-widget-placeholder {
+      background: var(--color-cream);
+      border-radius: 16px;
+      padding: 3rem 2rem;
+      text-align: center;
+      border: 2px dashed #d5d0c8;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .google-widget-placeholder h3 {
+      color: var(--color-navy);
+      margin-bottom: 0.75rem;
+      font-size: 1.1rem;
+    }
+
+    .google-widget-placeholder p {
+      color: #888;
+      font-size: 0.88rem;
+      margin: 0 auto 1.25rem;
+      text-align: center;
+    }
+
+    .google-widget-placeholder a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: #4285F4;
+      color: #fff;
+      padding: 0.6rem 1.4rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+
+    .google-widget-placeholder a:hover { background: #3367d6; }
+
+    /* Echte Google-reviewkaarten */
+    .google-reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      width: 100%;
+      max-width: 900px;
+    }
+    @media (max-width: 700px) { .google-reviews-grid { grid-template-columns: 1fr; } }
+
+    .g-card {
+      background: var(--color-white);
+      border: 1px solid #ececec;
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .g-card-head { display: flex; align-items: center; gap: 0.85rem; margin-bottom: 0.6rem; }
+
+    .g-av {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff; font-weight: 700; font-size: 1.05rem;
+    }
+
+    .g-name { font-weight: 700; color: var(--color-navy); font-size: 0.95rem; line-height: 1.2; }
+    .g-source { display: flex; align-items: center; gap: 0.3rem; font-size: 0.78rem; color: #888; margin-top: 1px; }
+    .g-source b { font-weight: 700; }
+    .g-source .g-g { color:#4285F4; } .g-source .g-o { color:#EA4335; }
+    .g-source .g-y { color:#FBBC05; } .g-source .g-b { color:#4285F4; } .g-source .g-gr { color:#34A853; }
+
+    .g-meta { display: flex; align-items: center; gap: 0.5rem; font-size: 0.78rem; color: #999; margin-bottom: 0.6rem; }
+    .g-meta .g-stars { color: #FBBC05; letter-spacing: 1px; }
+    .g-new { background:#e8f0fe; color:#1a73e8; font-size:0.62rem; font-weight:800; padding:0.12rem 0.45rem; border-radius:4px; letter-spacing:0.6px; }
+
+    .g-text { color: #444; font-size: 0.92rem; line-height: 1.6; margin: 0; }
+
+    /* CTA */
+    .reviews-cta {
+      text-align: center;
+      padding: 4rem 0;
+      background: var(--color-cream);
+    }
+
+    .reviews-cta h2 { margin-bottom: 0.75rem; }
+    .reviews-cta p  { color: #666; margin: 0 auto 2rem; text-align: center; }
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATIE ===== -->
+  <nav class="nav transparent" id="nav">
+    <div class="container">
+      <a href="index.html" class="nav-logo">
+        <img src="img/logo.png" alt="Tuinbazen logo" class="nav-logo-img">
+      </a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="index.html"      class="nav-link">Home</a></li>
+        <li class="has-dropdown">
+          <a href="diensten.html" class="nav-link">Diensten <span class="dd-arrow">▾</span></a>
+          <ul class="nav-dropdown">
+            <li class="dd-all"><a href="diensten.html">Alle diensten →</a></li>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </li>
+        <li><a href="portfolio.html"  class="nav-link">Projecten</a></li>
+        <li><a href="reviews.html"    class="nav-link active">Reviews</a></li>
+        <li><a href="contact.html"    class="nav-link">Contact</a></li>
+        <li><a href="contact.html"    class="nav-link nav-cta">Offerte aanvragen</a></li>
+      </ul>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu openen">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== HERO ===== -->
+  <section class="reviews-hero">
+    <div class="container">
+      <span class="section-label">Wat klanten zeggen</span>
+      <h1>Ervaringen uit de buurt</h1>
+      <p>50+ tevreden klanten gingen je voor. Lees hun ervaringen.</p>
+    </div>
+  </section>
+
+  <!-- ===== STAT BALK ===== -->
+  <div class="reviews-stat-bar">
+    <div class="container reviews-stat-inner">
+      <div class="rs-item">
+        <span class="rs-num">4.9</span>
+        <span class="rs-label">Gemiddelde score</span>
+      </div>
+      <div class="rs-divider"></div>
+      <div class="rs-item">
+        <span class="rs-num">★★★★★</span>
+        <span class="rs-label">Beoordeeld op Werkspot</span>
+      </div>
+      <div class="rs-divider"></div>
+      <div class="rs-item">
+        <span class="rs-num">50+</span>
+        <span class="rs-label">Tevreden klanten</span>
+      </div>
+      <div class="rs-divider"></div>
+      <div class="rs-item">
+        <span class="rs-num">Lokaal</span>
+        <span class="rs-label">Actief in Zuid-Limburg</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== REVIEWS GRID ===== -->
+  <section class="reviews-page-body">
+    <div class="container">
+
+      <div class="section-header reveal" style="margin-bottom:3rem;">
+        <h2>Klantbeoordelingen</h2>
+        <p>Eerlijke ervaringen van klanten uit de regio, geverifieerd via ons Werkspot-profiel.</p>
+      </div>
+
+      <div class="reviews-grid">
+
+        <div class="review-card reveal">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Dennis heeft mooi werk geleverd. Wij zijn super tevreden. En bij Dennis is afspraak is afspraak. Vriendelijkheid en goede communicatie kenmerken hem. We gaan genieten van ons mooie zonneterrasje. Dankjewel Dennis"</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">JB</div>
+            <div><strong>John Bongaerts</strong><span>Bocholtz · Bestrating</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Dennis is een fijne gast die netjes en vakkundig te werk gaat. Alles wordt keurig overlegd, ook als er tussentijds iets aangepast of gewijzigd moet worden. Zeker een aanrader."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">HE</div>
+            <div><strong>Hugo</strong><span>Elsloo · Bestrating</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Je enthousiaste en gemotiveerde houding werkten aanstekelijk en leidden tot een prachtig resultaat. Dank je voor je open houding, het meedenken en je goede adviezen."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">HB</div>
+            <div><strong>Henk en Truus Bijker</strong><span>Brunssum · Tuinaanleg</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-0">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Excellent communication. Dennis is professional and did an excellent job. We were very happy with the final result."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">CV</div>
+            <div><strong>Caroline</strong><span>Vaals · Oprit</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"We wilden een tuinhuis plaatsen en zochten in eerste instantie iemand voor de bestrating waarop het tuinhuis gebouwd kon worden. Via Werkspot kwamen we in contact met Dennis. Hij reageerde direct en kon de week erna al beginnen."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">LW</div>
+            <div><strong>Lea Wijshijer</strong><span>Landgraaf · Bestrating</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-2">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Vlotte communicatie, oplossingsgericht en goed werk."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">PM</div>
+            <div><strong>Pieter</strong><span>Maastricht · Grondverzet</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-0">
+          <div class="review-card-stars">★★★★★</div>
+          <p class="review-card-text">"Heel fijn dat er ook klusbedrijven zijn die tijd maken voor een klein klusje. Heel accuraat en netjes uitgevoerd door een erg leuke en vriendelijke 'professionele klusser'. Ik heb nog nooit een scherpere zaagsnede gezien."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">MV</div>
+            <div><strong>Meindert</strong><span>Valkenburg · Vensterbank</span></div>
+          </div>
+        </div>
+
+        <div class="review-card reveal reveal-delay-1">
+          <div class="review-card-stars">★★★★☆</div>
+          <p class="review-card-text">"Goed werk geleverd. Ben blij dat alles weer netjes uitziet."</p>
+          <div class="review-card-auteur">
+            <div class="review-card-av">K</div>
+            <div><strong>Klant via Werkspot</strong><span>Voortuin renoveren</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GOOGLE REVIEWS WIDGET ===== -->
+  <section class="google-reviews-sectie">
+    <div class="container">
+      <div class="section-header reveal" style="margin-bottom:2.5rem;">
+        <h2>Onze Google Reviews</h2>
+        <p>Bekijk alle beoordelingen rechtstreeks via Google.</p>
+      </div>
+
+      <div class="google-widget-wrap reveal">
+
+        <div class="google-badge">
+          <div class="google-logo" style="font-size:1.5rem; font-weight:800; letter-spacing:-0.5px;">
+            <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+          </div>
+          <div class="google-score">
+            <div class="google-score-num">4.9</div>
+            <div class="google-score-stars">★★★★★</div>
+            <div class="google-score-label">Gebaseerd op Google-beoordelingen</div>
+          </div>
+        </div>
+
+        <!-- ════════════════════════════════════════════════════════════
+             LIVE GOOGLE REVIEWS - TRUSTINDEX WIDGET (voor later)
+             ────────────────────────────────────────────────────────────
+             De kaarten hieronder zijn nu handmatig overgenomen van Google.
+             Wil je ze later automatisch laten bijwerken?
+               1. Maak een gratis account op https://www.trustindex.io
+               2. Koppel het Google Bedrijfsprofiel "Tuinen die verbazen"
+               3. Kopieer het <script>-snippet en plak het tussen de
+                  TRUSTINDEX-markeringen hieronder.
+               4. Verwijder dán het handmatige .google-reviews-grid blok.
+             ════════════════════════════════════════════════════════════ -->
+        <!-- TRUSTINDEX:START - plak hier (later) het Trustindex embed-snippet -->
+        <!-- TRUSTINDEX:END -->
+
+        <!-- Handmatig overgenomen Google-reviews -->
+        <div class="google-reviews-grid">
+
+          <div class="g-card reveal">
+            <div class="g-card-head">
+              <div class="g-av" style="background:#7cb342;">H</div>
+              <div>
+                <div class="g-name">Hilde Bours</div>
+                <div class="g-source">Review van <b><span class="g-g">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-gr">l</span><span class="g-o">e</span></b></div>
+              </div>
+            </div>
+            <div class="g-meta"><span class="g-stars">★★★★★</span> · 2 maanden geleden</div>
+            <p class="g-text">"Wij zijn ontzettend tevreden over Dennis van Tuinbazen. Hij heeft bij ons de oprit aangelegd en het resultaat is echt top. Dennis is betrouwbaar en komt zijn afspraken na."</p>
+          </div>
+
+          <div class="g-card reveal reveal-delay-1">
+            <div class="g-card-head">
+              <div class="g-av" style="background:#5f6368;">C</div>
+              <div>
+                <div class="g-name">Caroline Gillmer</div>
+                <div class="g-source">Review van <b><span class="g-g">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-gr">l</span><span class="g-o">e</span></b></div>
+              </div>
+            </div>
+            <div class="g-meta"><span class="g-stars">★★★★★</span> · 2 dagen geleden <span class="g-new">NIEUW</span></div>
+            <p class="g-text">"Bestrating &amp; oprit, excellent communication. Dennis is professional and did an excellent job. We were very happy with the final result."</p>
+          </div>
+
+          <div class="g-card reveal reveal-delay-2">
+            <div class="g-card-head">
+              <div class="g-av" style="background:#c0492b;">G</div>
+              <div>
+                <div class="g-name">George Reinartz</div>
+                <div class="g-source">Review van <b><span class="g-g">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-gr">l</span><span class="g-o">e</span></b></div>
+              </div>
+            </div>
+            <div class="g-meta"><span class="g-stars">★★★★★</span> · een week geleden <span class="g-new">NIEUW</span></div>
+            <p class="g-text">"Vanmorgen de mannen van Tuinen die Verbazen in onze tuin bezig gezien. Super hard gewerkt, alles weer strak gesnoeid en alles netjes opgeruimd en afgevoerd. Bedankt mannen!"</p>
+          </div>
+
+          <div class="g-card reveal reveal-delay-0">
+            <div class="g-card-head">
+              <div class="g-av" style="background:#00897b;">N</div>
+              <div>
+                <div class="g-name">Nicole Bovens</div>
+                <div class="g-source">Review van <b><span class="g-g">G</span><span class="g-o">o</span><span class="g-y">o</span><span class="g-b">g</span><span class="g-gr">l</span><span class="g-o">e</span></b></div>
+              </div>
+            </div>
+            <div class="g-meta"><span class="g-stars">★★★★★</span> · 2 maanden geleden</div>
+            <p class="g-text">"Ik kan Dennis zeer zeker aanbevelen. Denkt mee en komt zijn afspraken na."</p>
+          </div>
+
+        </div>
+
+        <a class="btn btn-outline-green" href="https://www.google.com/maps/search/Tuinen+die+verbazen" target="_blank" rel="noopener">Bekijk alle reviews op Google</a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== WERKSPOT REVIEWS ===== -->
+  <section class="werkspot-sectie">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Extern beoordeeld</span>
+        <h2>Onze Werkspot beoordelingen</h2>
+        <p>Klanten beoordelen ons ook op Werkspot, het onafhankelijke platform voor vakmannen.</p>
+      </div>
+      <div class="werkspot-cta reveal">
+        <p style="margin:0 auto 1.5rem; color:#666; max-width:60ch; text-align:center;">De beoordelingen hierboven komen van ons Werkspot-profiel. Bekijk al onze reviews, inclusief de reacties, rechtstreeks op Werkspot.</p>
+        <a href="https://www.werkspot.nl/profiel/tuinen-die-verbazen/reviews" target="_blank" rel="noopener" class="btn btn-outline-green">Bekijk alle Werkspot reviews</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA ===== -->
+  <section class="reviews-cta">
+    <div class="container">
+      <h2>Ook tevreden worden?</h2>
+      <p>Vraag vrijblijvend een offerte aan en ontdek zelf waarom onze klanten zo enthousiast zijn.</p>
+      <a href="contact.html" class="btn btn-primary">Offerte aanvragen</a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-main">
+      <div class="container footer-grid">
+        <div class="footer-brand">
+          <div class="footer-brand-name">Tuinbazen</div>
+          <p class="footer-tagline">Vakkundig hovenierswerk in Zuid-Limburg, van ontwerp tot oplevering.</p>
+          <div class="footer-contact-info">
+            <a href="tel:+31642074998">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.64 3.41 2 2 0 0 1 3.62 1.25h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.84a16 16 0 0 0 6.29 6.29l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              +31 6 42 07 49 98
+            </a>
+            <a href="mailto:vandenbergdennis2@gmail.com">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              vandenbergdennis2@gmail.com
+            </a>
+            <span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Zuid-Limburg
+            </span>
+          </div>
+          <a href="contact.html" class="footer-offerte">Offerte aanvragen →</a>
+        </div>
+        <div class="footer-col">
+          <h4>Navigatie</h4>
+          <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="diensten.html">Diensten</a></li>
+            <li><a href="portfolio.html">Projecten</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Diensten</h4>
+          <ul>
+            <li><a href="diensten-tuinontwerp.html">Tuinontwerp</a></li>
+            <li><a href="diensten-terrassen.html">Terrassen</a></li>
+            <li><a href="diensten-grondverzet.html">Grondverzet</a></li>
+            <li><a href="diensten-tuinonderhoud.html">Tuinonderhoud</a></li>
+            <li><a href="diensten-opritten.html">Opritten</a></li>
+            <li><a href="diensten-gazon.html">Gazon</a></li>
+            <li><a href="diensten-vlonders.html">Vlonders</a></li>
+            <li><a href="diensten-schuttingen.html">Schuttingen</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span class="footer-copy">© 2026 Tuinbazen, Alle rechten voorbehouden</span>
+        <a href="contact.html" class="footer-cta-link">Offerte aanvragen →</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
