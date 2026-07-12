@@ -40,9 +40,13 @@ document.querySelectorAll('.has-dropdown').forEach(item => {
   });
 });
 
-/* Sluit menu bij klik op een link */
+/* Sluit menu bij klik op een link.
+   Uitzondering: de "Diensten"-toggle op mobiel — die klapt alleen het
+   submenu uit en mag het menu NIET sluiten (anders schuiven de links
+   onder je vinger weg en tik je op de verkeerde pagina). */
 navMenu.querySelectorAll('.nav-link').forEach(link => {
   link.addEventListener('click', () => {
+    if (window.innerWidth <= 768 && link.parentElement.classList.contains('has-dropdown')) return;
     navMenu.classList.remove('open');
     navToggle.classList.remove('open');
   });
