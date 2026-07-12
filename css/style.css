@@ -496,11 +496,10 @@ p {
     left: 1.5rem;
   }
 
+  /* CTA-knop hoort niet in het mobiele hamburger-menu (staat al in
+     hero, CTA-banner en footer); alleen zichtbaar in de desktop-nav. */
   .nav-cta {
-    margin: 0.5rem 1.5rem 0;
-    width: calc(100% - 3rem);
-    text-align: center;
-    justify-content: center;
+    display: none;
   }
 }
 
