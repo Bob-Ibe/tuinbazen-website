@@ -1509,6 +1509,43 @@ a.hero-proof-link:hover {
 }
 
 /* =============================================
+   STATS MET ACHTERGRONDFOTO (optionele variant)
+   Verwijder de class 'stats-fotos' van de sectie
+   om de oude (beige) kaartjes terug te zetten.
+   ============================================= */
+.stats-fotos .stat-item {
+  position: relative;
+  background-color: var(--color-primary);
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+/* Donkere gradient-overlay voor tekstcontrast (volgt de ronde hoeken) */
+.stats-fotos .stat-item::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(to bottom, rgba(18,26,20,0.34) 0%, rgba(18,26,20,0.78) 100%);
+  z-index: 0;
+}
+.stats-fotos .stat-item > * { position: relative; z-index: 1; }
+
+.stats-fotos .stat-icon { background: rgba(255,255,255,0.18); }
+.stats-fotos .stat-icon svg { stroke: #fff; }
+.stats-fotos .stat-number { color: #fff; text-shadow: 0 1px 6px rgba(0,0,0,0.45); }
+.stats-fotos .stat-suffix { color: #fff; }
+.stats-fotos .stat-label { color: rgba(255,255,255,0.92); }
+.stats-fotos .stat-item:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.28); }
+
+/* Per stat de bijbehorende achtergrondfoto (volgorde in .stats-grid) */
+.stats-fotos .stats-grid .stat-item:nth-child(1) { background-image: url('../img/portfolio/terras-makeover.webp'); }
+.stats-fotos .stats-grid .stat-item:nth-child(2) { background-image: url('../img/portfolio/grondverzet-graafmachine.webp'); }
+.stats-fotos .stats-grid .stat-item:nth-child(3) { background-image: url('../img/portfolio/onderhoud-beplanting.webp'); }
+.stats-fotos .stats-grid .stat-item:nth-child(4) { background-image: url('../img/portfolio/vlonder-rood.webp'); }
+
+/* =============================================
    REVIEWS - progress bar
    ============================================= */
 .reviews-progress {
